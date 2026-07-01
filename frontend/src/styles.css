@@ -1,0 +1,253 @@
+:root {
+  color: #1c2430;
+  background: #f4f7fb;
+  font-family:
+    Inter,
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 40px 24px;
+  background:
+    linear-gradient(135deg, rgba(15, 98, 254, 0.08), transparent 32%),
+    linear-gradient(315deg, rgba(36, 161, 72, 0.08), transparent 28%),
+    #f4f7fb;
+}
+
+.workspace {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.intro {
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #0f62fe;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 14px;
+  font-size: 48px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.intro p:last-child {
+  margin-bottom: 0;
+  color: #526071;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.tool-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.input-panel,
+.output-panel {
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+}
+
+.input-panel {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  color: #263241;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #c5d1de;
+  border-radius: 6px;
+  padding: 0 14px;
+  color: #142033;
+  background: #ffffff;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #0f62fe;
+  box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.12);
+}
+
+button {
+  min-height: 46px;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 18px;
+  color: #ffffff;
+  background: #0f62fe;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #004ee0;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.error-message {
+  margin: 0;
+  border-left: 4px solid #d02626;
+  padding: 10px 12px;
+  color: #9f1b1b;
+  background: #fff1f1;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.token-guide {
+  border: 1px solid #cfe0f5;
+  border-radius: 8px;
+  padding: 12px;
+  color: #2b3b4f;
+  background: #f3f8ff;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.token-guide strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #15345d;
+  font-size: 14px;
+}
+
+.token-guide p {
+  margin: 0 0 8px;
+}
+
+.token-guide a {
+  color: #0f62fe;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.token-guide a:hover {
+  text-decoration: underline;
+}
+
+.output-panel {
+  min-height: 540px;
+  overflow: hidden;
+}
+
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #d9e2ec;
+  padding: 18px 20px;
+}
+
+.output-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.output-header button {
+  min-height: 38px;
+  padding: 0 14px;
+  background: #243447;
+}
+
+.result-box {
+  min-height: 480px;
+  max-height: 68vh;
+  overflow: auto;
+  padding: 20px;
+  background: #fbfdff;
+}
+
+.muted {
+  margin: 0;
+  color: #657589;
+  line-height: 1.6;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  color: #172235;
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@media (max-width: 860px) {
+  .app-shell {
+    padding: 28px 16px;
+  }
+
+  .tool-layout {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .output-panel,
+  .result-box {
+    min-height: 360px;
+  }
+}
