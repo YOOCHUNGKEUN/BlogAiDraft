@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export default function App() {
   const [githubUrl, setGithubUrl] = useState("");
@@ -57,7 +57,7 @@ export default function App() {
           <p className="eyebrow">BlogDraftAI</p>
           <h1>GitHub 코드를 블로그 초안으로 정리</h1>
           <p>
-            저장소 주소와 토큰을 입력하면 FastAPI 서버가 코드를 모아 Claude에 전달하고,
+            저장소 주소와 토큰을 입력하면 FastAPI 서버가 코드를 모아 OpenAI에 전달하고,
             정리된 한국어 기술 글 초안을 반환합니다.
           </p>
         </div>
@@ -122,7 +122,7 @@ export default function App() {
               </button>
             </div>
             <div className="result-box">
-              {isLoading && <p className="muted">Claude가 저장소 내용을 정리하는 중입니다.</p>}
+              {isLoading && <p className="muted">OpenAI가 저장소 내용을 정리하는 중입니다.</p>}
               {!isLoading && !result && !error && (
                 <p className="muted">생성된 블로그 초안이 여기에 표시됩니다.</p>
               )}

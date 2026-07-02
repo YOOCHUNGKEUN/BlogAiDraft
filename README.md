@@ -1,12 +1,18 @@
 # BlogDraftAI API
 
-GitHub 저장소의 Kotlin 코드를 수집해 Claude API로 전달하고, 한국어 기술 블로그 초안을 생성하는 프로젝트입니다. `backend` 폴더에는 FastAPI 서버가 있고, `frontend` 폴더에는 저장소 URL, GitHub private token, 포스트 유형을 입력하고 결과를 확인할 수 있는 React 화면이 있습니다.
+GitHub 저장소의 Kotlin 코드를 수집해 OpenAI API로 전달하고, 한국어 기술 블로그 초안을 생성하는 프로젝트입니다. `backend` 폴더에는 FastAPI 서버가 있고, `frontend` 폴더에는 저장소 URL, GitHub private token, 포스트 유형을 입력하고 결과를 확인할 수 있는 React 화면이 있습니다.
 
 ## 프로젝트 구조
 
 ```text
 BlogDraftAI_API/
 ├─ backend/
+│  ├─ domains/
+│  │  └─ blog/
+│  │     ├─ constants.py
+│  │     ├─ github.py
+│  │     ├─ prompt.py
+│  │     └─ schemas.py
 │  ├─ main.py
 │  ├─ requirements.txt
 │  └─ .env
@@ -27,10 +33,10 @@ cd backend
 py -m pip install -r requirements.txt
 ```
 
-`backend/main.py`와 같은 위치에 `backend/.env` 파일을 만들고 Claude API 키를 등록합니다.
+`backend/main.py`와 같은 위치에 `backend/.env` 파일을 만들고 OpenAI API 키를 등록합니다.
 
 ```env
-ANTHROPIC_API_KEY=여기에_클로드_API키
+OPENAI_API_KEY=여기에_OpenAI_API키
 ```
 
 ## 백엔드 실행
@@ -44,8 +50,21 @@ py -m uvicorn main:app --reload
 
 - `http://127.0.0.1:8000`
 - `http://127.0.0.1:8000/docs`
+- `http://127.0.0.1:8000/health`
 
-## 프론트엔드 실행
+## 일반 실행: 백엔드에서 웹까지 같이 보기
+
+프론트엔드를 한 번 빌드하면 FastAPI가 `frontend/dist`를 같이 서빙합니다.
+
+```powershell
+cd D:\Chongfolder\project\branch\blogdragf_ai-workspace\BlogDraftAI_API\frontend
+npm.cmd install
+npm.cmd run build
+```
+
+그 다음 백엔드를 실행하고 브라우저에서 `http://127.0.0.1:8000`으로 접속합니다.
+
+## 개발 실행: 프론트엔드만 따로 켜기
 
 ```powershell
 cd D:\Chongfolder\project\branch\blogdragf_ai-workspace\BlogDraftAI_API\frontend
@@ -53,7 +72,7 @@ npm.cmd install
 npm.cmd run dev
 ```
 
-기본 프론트엔드 주소는 Vite 실행 로그에 표시됩니다. 프론트엔드는 기본적으로 `http://127.0.0.1:8000/generate` API를 호출합니다.
+기본 프론트엔드 주소는 Vite 실행 로그에 표시됩니다. 개발 서버는 `/generate` 요청을 `http://127.0.0.1:8000/generate`로 프록시합니다.
 
 ## 사용 방법
 

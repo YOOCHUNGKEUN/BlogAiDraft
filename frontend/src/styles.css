@@ -19,9 +19,7 @@ body {
   min-width: 320px;
 }
 
-button,
-input,
-select {
+button, input, select {
   font: inherit;
 }
 
@@ -51,9 +49,7 @@ select {
   font-weight: 800;
 }
 
-h1,
-h2,
-p {
+h1, h2, p {
   margin-top: 0;
 }
 
@@ -78,8 +74,7 @@ h1 {
   align-items: start;
 }
 
-.input-panel,
-.output-panel {
+.input-panel, .output-panel {
   border: 1px solid #d9e2ec;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.92);
@@ -100,8 +95,7 @@ label {
   font-weight: 800;
 }
 
-input,
-select {
+input, select {
   width: 100%;
   min-height: 46px;
   border: 1px solid #c5d1de;
@@ -112,8 +106,7 @@ select {
   outline: none;
 }
 
-input:focus,
-select:focus {
+input:focus, select:focus {
   border-color: #0f62fe;
   box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.12);
 }
@@ -246,8 +239,7 @@ pre {
     font-size: 36px;
   }
 
-  .output-panel,
-  .result-box {
+  .output-panel, .result-box {
     min-height: 360px;
   }
 }
