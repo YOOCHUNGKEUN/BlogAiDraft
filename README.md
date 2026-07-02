@@ -1,6 +1,6 @@
 # BlogDraftAI API
 
-GitHub 저장소의 Kotlin 코드를 수집해 OpenAI API로 전달하고, 한국어 기술 블로그 초안을 생성하는 프로젝트입니다. `backend` 폴더에는 FastAPI 서버가 있고, `frontend` 폴더에는 저장소 URL, GitHub private token, 포스트 유형을 입력하고 결과를 확인할 수 있는 React 화면이 있습니다.
+GitHub 저장소의 주요 프로젝트 파일을 수집해 OpenAI API로 전달하고, 한국어 기술 블로그 초안을 생성하는 프로젝트입니다. `backend` 폴더에는 FastAPI 서버가 있고, `frontend` 폴더에는 저장소 URL, GitHub private token, 포스트 유형을 입력하고 결과를 확인할 수 있는 React 화면이 있습니다.
 
 ## 프로젝트 구조
 
@@ -82,7 +82,7 @@ npm.cmd run dev
 4. private 저장소라면 GitHub token을 입력합니다.
 5. 포스트 유형을 선택하고 초안 생성을 실행합니다.
 
-현재 백엔드는 Kotlin `.kt` 파일을 대상으로 코드를 수집합니다. 생성 결과는 TL;DR, 제작 계기, 기술 스택, 프롬프트 설계, 서버/앱 연동, 트레이드오프, 회고 순서의 실제 블로그 발행용 구조로 작성됩니다. 응답 길이를 넉넉히 설정해 글이 중간에 끊기지 않고 회고까지 마무리되도록 구성했습니다.
+현재 백엔드는 Flutter/Dart, Kotlin, JavaScript, Python, 설정 파일, README 등 프로젝트 분석에 필요한 주요 파일을 수집합니다. 생성 결과는 레포지토리의 실제 성격에 맞춰 게임이면 게임 규칙과 상태 흐름, 앱이면 주요 기능과 화면 흐름, 서버/API이면 엔드포인트와 데이터 흐름을 중심으로 작성됩니다. 응답 길이를 넉넉히 설정해 글이 중간에 끊기지 않고 회고까지 마무리되도록 구성했습니다.
 
 ## GitHub Private Token 안내
 

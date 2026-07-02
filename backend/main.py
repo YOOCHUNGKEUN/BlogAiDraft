@@ -1,12 +1,12 @@
 from fastapi import FastAPI, HTTPException
-from openai import OpenAI
+from openai import OpenAI, OpenAIError
 from dotenv import load_dotenv
 from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from domains.blog.constants import OPENAI_MAX_OUTPUT_TOKENS, OPENAI_MODEL
-from domains.blog.github import collect_kt_files, parse_github_url
+from domains.blog.github import collect_project_files, parse_github_url
 from domains.blog.prompt import build_blog_prompt
 from domains.blog.schemas import BlogRequest
 
@@ -33,15 +33,21 @@ async def generate_blog(request: BlogRequest):
         owner, repo = parse_github_url(request.github_url)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
-    code = await collect_kt_files(owner, repo, token=request.github_token)
+    code = await collect_project_files(owner, repo, token=request.github_token)
     if not code:
-        raise HTTPException(status_code=400, detail="Kotlin 파일을 찾을 수 없습니다")
+        raise HTTPException(status_code=400, detail="분석할 수 있는 프로젝트 파일을 찾을 수 없습니다")
     prompt = build_blog_prompt(request, code)
-    response = client.responses.create(
-        model=OPENAI_MODEL,
-        input=prompt,
-        max_output_tokens=OPENAI_MAX_OUTPUT_TOKENS,
-    )
+    try:
+        response = client.responses.create(
+            model=OPENAI_MODEL,
+            input=prompt,
+            max_output_tokens=OPENAI_MAX_OUTPUT_TOKENS,
+        )
+    except OpenAIError as e:
+        raise HTTPException(
+            status_code=502,
+            detail=f"OpenAI API 호출 실패: {str(e)}",
+        )
     return {"result": response.output_text}
 
 

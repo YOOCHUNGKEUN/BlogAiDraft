@@ -12,6 +12,16 @@ export default function App() {
 
   const canSubmit = useMemo(() => githubUrl.trim().length > 0 && !isLoading, [githubUrl, isLoading]);
 
+  async function readResponse(response) {
+    const contentType = response.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      return response.json();
+    }
+
+    const text = await response.text();
+    return { detail: text || "서버에서 비어 있는 응답을 받았습니다." };
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     setError("");
@@ -31,7 +41,7 @@ export default function App() {
         })
       });
 
-      const data = await response.json();
+      const data = await readResponse(response);
 
       if (!response.ok) {
         throw new Error(data.detail || "블로그 초안 생성에 실패했습니다.");
