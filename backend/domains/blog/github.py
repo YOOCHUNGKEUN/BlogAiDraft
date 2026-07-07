@@ -1,5 +1,6 @@
 import httpx
 from fastapi import HTTPException
+from urllib.parse import quote
 
 from domains.blog.constants import (
     GITHUB_API_ACCEPT_HEADER,
@@ -64,12 +65,28 @@ def sort_repo_files(file: dict) -> tuple[int, int, str]:
 
 
 async def collect_project_files(owner: str, repo: str, token: str = "") -> str:
-    url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{GITHUB_TREE_BRANCH}?recursive=1"
+    return await collect_project_files_from_branch(owner, repo, GITHUB_TREE_BRANCH, token)
+
+
+async def collect_project_files_from_branch(
+    owner: str,
+    repo: str,
+    branch: str = "",
+    token: str = "",
+) -> str:
+    target_branch = branch.strip() or GITHUB_TREE_BRANCH
+    encoded_branch = quote(target_branch, safe="")
+    url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{encoded_branch}?recursive=1"
     headers = build_github_headers(token)
 
     async with httpx.AsyncClient() as client_http:
         response = await client_http.get(url, headers=headers)
         if response.status_code != 200:
+            if branch.strip():
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"입력한 브랜치 '{branch.strip()}'를 찾을 수 없습니다. 브랜치명을 확인해주세요.",
+                )
             raise HTTPException(status_code=400, detail="GitHub repo 트리 접근 실패")
 
         tree = response.json().get("tree", [])
@@ -83,7 +100,7 @@ async def collect_project_files(owner: str, repo: str, token: str = "") -> str:
         for file in sorted(source_files, key=sort_repo_files)[:MAX_REPO_FILES]:
             file_url = (
                 f"https://raw.githubusercontent.com/{owner}/{repo}/"
-                f"{GITHUB_TREE_BRANCH}/{file['path']}"
+                f"{encoded_branch}/{file['path']}"
             )
             file_response = await client_http.get(file_url, headers=headers)
             result += f"\n\n// 파일: {file['path']}\n{file_response.text}"
