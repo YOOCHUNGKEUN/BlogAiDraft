@@ -15,6 +15,8 @@ load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
 
 FRONTEND_DIST_DIR = Path(__file__).resolve().parent.parent / "frontend" / "dist"
 
+
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,

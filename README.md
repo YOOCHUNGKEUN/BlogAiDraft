@@ -1,6 +1,6 @@
 # BlogDraftAI API
 
-GitHub 저장소의 주요 프로젝트 파일을 수집해 OpenAI API로 전달하고, 한국어 기술 블로그 초안을 생성하는 프로젝트입니다. `backend` 폴더에는 FastAPI 서버가 있고, `frontend` 폴더에는 저장소 URL, GitHub private token, 포스트 유형을 입력하고 결과를 확인할 수 있는 React 화면이 있습니다.
+GitHub 저장소의 주요 프로젝트 파일을 수집해 Claude API로 전달하고, 한국어 기술 블로그 초안을 생성하는 프로젝트입니다. `backend` 폴더에는 FastAPI 서버가 있고, `frontend` 폴더에는 저장소 URL, GitHub private token, 포스트 유형을 입력하고 결과를 확인할 수 있는 React 화면이 있습니다.
 
 ## 프로젝트 구조
 
@@ -33,10 +33,10 @@ cd backend
 py -m pip install -r requirements.txt
 ```
 
-`backend/main.py`와 같은 위치에 `backend/.env` 파일을 만들고 OpenAI API 키를 등록합니다.
+`backend/main.py`와 같은 위치에 `backend/.env` 파일을 만들고 Claude API 키를 등록합니다.
 
 ```env
-OPENAI_API_KEY=여기에_OpenAI_API키
+ANTHROPIC_API_KEY=여기에_Claude_API키
 ```
 
 ## 백엔드 실행

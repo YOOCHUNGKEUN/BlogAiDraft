@@ -1,5 +1,5 @@
-OPENAI_MODEL = "gpt-5.4-mini"
-OPENAI_MAX_OUTPUT_TOKENS = 6000
+CLAUDE_MODEL = "claude-opus-4-5"
+CLAUDE_MAX_TOKENS = 6000
 
 GITHUB_API_ACCEPT_HEADER = "application/vnd.github.v3+json"
 GITHUB_TREE_BRANCH = "HEAD"
