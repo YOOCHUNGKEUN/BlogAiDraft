@@ -1,4 +1,5 @@
-# BlogDraftAI API
+# BlogDraftAI API (2026-07-08 기준, 현재 claude-opus-4-5 모델 사용 중)
+# claude-opus-4-5 모델 기준, 1회 약 0.12달러 지출
 
 GitHub 저장소의 주요 프로젝트 파일을 수집해 Claude API로 전달하고, 한국어 기술 블로그 초안을 생성하는 프로젝트입니다. `backend` 폴더에는 FastAPI 서버가 있고, `frontend` 폴더에는 저장소 URL, GitHub private token, 포스트 유형을 입력하고 결과를 확인할 수 있는 React 화면이 있습니다.
 
@@ -24,55 +25,49 @@ BlogDraftAI_API/
 └─ HISTORY.md
 ```
 
-## 실행 준비
 
+## 환경 새로 세팅 될 때마다 실행준비
 백엔드 의존성을 설치합니다.
-
-```powershell
-cd backend
-py -m pip install -r requirements.txt
-```
-
 `backend/main.py`와 같은 위치에 `backend/.env` 파일을 만들고 Claude API 키를 등록합니다.
+ ANTHROPIC_API_KEY=여기에_Claude_API키
 
-```env
-ANTHROPIC_API_KEY=여기에_Claude_API키
-```
+1. 가상환경 생성 : python3 -m venv venv
+2. 가상환경 활성화 : source venv/bin/activate
+3. 필요한 라이브러리 설치(보통 기본적으로 아래의 라이브러리들이 없음) :
+    - pip install fastapi uvicorn 
+    - pip install anthropic
+    - pip install python-dotenv
+
 
 ## 백엔드 실행
-
-```powershell
 cd D:\Chongfolder\project\branch\blogdragf_ai-workspace\BlogDraftAI_API\backend
 py -m uvicorn main:app --reload
-```
+
+
 
 확인 주소:
-
 - `http://127.0.0.1:8000`
 - `http://127.0.0.1:8000/docs`
 - `http://127.0.0.1:8000/health`
 
+
 ## 일반 실행: 백엔드에서 웹까지 같이 보기
-
 프론트엔드를 한 번 빌드하면 FastAPI가 `frontend/dist`를 같이 서빙합니다.
-
-```powershell
 cd D:\Chongfolder\project\branch\blogdragf_ai-workspace\BlogDraftAI_API\frontend
-npm.cmd install
-npm.cmd run build
-```
 
-그 다음 백엔드를 실행하고 브라우저에서 `http://127.0.0.1:8000`으로 접속합니다.
 
 ## 개발 실행: 프론트엔드만 따로 켜기
-
-```powershell
 cd D:\Chongfolder\project\branch\blogdragf_ai-workspace\BlogDraftAI_API\frontend
+
+* Windowds
 npm.cmd install
 npm.cmd run dev
-```
 
-기본 프론트엔드 주소는 Vite 실행 로그에 표시됩니다. 개발 서버는 `/generate` 요청을 `http://127.0.0.1:8000/generate`로 프록시합니다.
+* Mac
+npm install
+npm run dev (개발모드로 실행해야 된다)
+그 다음 백엔드를 실행하고 브라우저에서 `http://127.0.0.1:8000`으로 접속합니다.
+!!기본 프론트엔드 주소는 Vite 실행 로그에 표시됩니다. 개발 서버는 `/generate` 요청을 `http://127.0.0.1:8000/generate`로 프록시합니다.
 
 ## 사용 방법
 
