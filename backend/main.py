@@ -55,7 +55,8 @@ async def generate_blog(request: BlogRequest):
             status_code=502,
             detail=f"Claude API 호출 실패: {str(e)}",
         )
-    return {"result": message.content[0].text}
+    text = "".join(b.text for b in message.content if b.type == "text")
+    return {"result": text}
 
 
 @app.get("/health")

@@ -1,4 +1,6 @@
-CLAUDE_MODEL = "claude-opus-4-5"
+# CLAUDE_MODEL = "claude-opus-4-5"
+CLAUDE_MODEL = "claude-fable-5"
+
 CLAUDE_MAX_TOKENS = 6000
 
 GITHUB_API_ACCEPT_HEADER = "application/vnd.github.v3+json"
